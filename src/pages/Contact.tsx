@@ -36,6 +36,7 @@ const Contact = () => {
 
   const onSubmit = async (data: ContactFormValues) => {
     try {
+      // Save to database
       const { error } = await supabase
         .from('contact_submissions')
         .insert([data]);
@@ -48,6 +49,16 @@ const Contact = () => {
           variant: "destructive",
         });
         return;
+      }
+
+      // Send email notifications
+      try {
+        await supabase.functions.invoke('send-contact-emails', {
+          body: data
+        });
+      } catch (emailError) {
+        console.error('Email sending failed:', emailError);
+        // Don't block the success flow if emails fail
       }
 
       toast({
