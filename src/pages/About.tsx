@@ -2,48 +2,37 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ValueCard from "@/components/ValueCard";
 import { Card, CardContent } from "@/components/ui/card";
-
 const About = () => {
-  const coreValues = [
-    {
-      title: "Posterity",
-      description: "We always keep the 'long view' in mind. While profit and gain are very important, we are in for the long haul and won't sacrifice long-term benefit for short-term gain!",
-      icon: "🌱"
-    },
-    {
-      title: "Relationships",
-      description: "We regard all our relationships as precious, something to be jealously guarded and nurtured, be they with our clients, our employees or our partners.",
-      icon: "🤝"
-    },
-    {
-      title: "Integrity",
-      description: "We mean what we say and say what we mean. We also expect the same of our clients & partners.",
-      icon: "⚖️"
-    },
-    {
-      title: "Value",
-      description: "If we can't add value, we have no business at the table!",
-      icon: "💎"
-    },
-    {
-      title: "Attitude",
-      description: "We recognize that our attitude matters in all we are involved in. We have a can-do spirit that is the secret sauce of our successes.",
-      icon: "🚀"
-    },
-    {
-      title: "Trust",
-      description: "It's the basis for all we do. We work hard to earn it and strive even harder to keep it!",
-      icon: "🔒"
-    },
-    {
-      title: "Equity",
-      description: "We strive for just and equitable solutions to our clients' needs that benefit all concerned. It's the only win-win there is.",
-      icon: "⚖️"
-    }
-  ];
-
-  return (
-    <div className="min-h-screen">
+  const coreValues = [{
+    title: "Posterity",
+    description: "We always keep the 'long view' in mind. While profit and gain are very important, we are in for the long haul and won't sacrifice long-term benefit for short-term gain!",
+    icon: "🌱"
+  }, {
+    title: "Relationships",
+    description: "We regard all our relationships as precious, something to be jealously guarded and nurtured, be they with our clients, our employees or our partners.",
+    icon: "🤝"
+  }, {
+    title: "Integrity",
+    description: "We mean what we say and say what we mean. We also expect the same of our clients & partners.",
+    icon: "⚖️"
+  }, {
+    title: "Value",
+    description: "If we can't add value, we have no business at the table!",
+    icon: "💎"
+  }, {
+    title: "Attitude",
+    description: "We recognize that our attitude matters in all we are involved in. We have a can-do spirit that is the secret sauce of our successes.",
+    icon: "🚀"
+  }, {
+    title: "Trust",
+    description: "It's the basis for all we do. We work hard to earn it and strive even harder to keep it!",
+    icon: "🔒"
+  }, {
+    title: "Equity",
+    description: "We strive for just and equitable solutions to our clients' needs that benefit all concerned. It's the only win-win there is.",
+    icon: "⚖️"
+  }];
+  return <div className="min-h-screen">
       <Header />
       
       {/* Hero Section */}
@@ -89,9 +78,12 @@ const About = () => {
                       <div className="text-muted-foreground">Years of Experience</div>
                     </div>
                     <div className="text-center">
-                      <div className="text-4xl font-bold text-primary mb-2">2</div>
+                      <div className="text-4xl font-bold text-primary mb-2">3</div>
                       <div className="text-muted-foreground">Primary Sectors</div>
-                      <div className="text-sm text-muted-foreground mt-1">Media & Healthcare</div>
+                      <div className="text-sm text-muted-foreground mt-1">Oil & Gas, Healthcare, 
+& Media 
+
+                    </div>
                     </div>
                     <div className="text-center">
                       <div className="text-4xl font-bold text-primary mb-2">54</div>
@@ -119,11 +111,7 @@ const About = () => {
               <Card className="p-8">
                 <CardContent className="p-0">
                   <h3 className="text-2xl font-bold mb-4 text-primary">Our Focus</h3>
-                  <p className="text-muted-foreground leading-relaxed">
-                    In recent years, our primary focus has been on the media and healthcare sectors, 
-                    creating solutions that address urgent challenges in these industries and drive 
-                    meaningful impact across African communities.
-                  </p>
+                  <p className="text-muted-foreground leading-relaxed">In recent years, our primary focus has been on the Oil and Gas, Healthcare and Media sectors, working with clients and creating solutions that address urgent challenges in these industries and drive meaningful impact across African communities.</p>
                 </CardContent>
               </Card>
             </div>
@@ -143,14 +131,7 @@ const About = () => {
           </div>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {coreValues.map((value, index) => (
-              <ValueCard
-                key={index}
-                title={value.title}
-                description={value.description}
-                icon={value.icon}
-              />
-            ))}
+            {coreValues.map((value, index) => <ValueCard key={index} title={value.title} description={value.description} icon={value.icon} />)}
           </div>
         </div>
       </section>
@@ -174,8 +155,6 @@ const About = () => {
       </section>
 
       <Footer />
-    </div>
-  );
+    </div>;
 };
-
 export default About;
