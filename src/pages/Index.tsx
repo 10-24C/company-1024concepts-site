@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import ValueCard from "@/components/ValueCard";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import ClientsPartners from "@/components/ClientsPartners";
 import { ArrowRight, Target, Users, Globe } from "lucide-react";
 
 const Index = () => {
@@ -170,6 +171,9 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      {/* Clients & Partners Section */}
+      <ClientsPartners />
 
       <Footer />
     </div>

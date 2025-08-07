@@ -8,10 +8,12 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Company Info */}
           <div className="col-span-1 md:col-span-2">
-            <Link to="/" className="flex items-center space-x-2 mb-4">
-              <div className="h-8 w-8 rounded bg-primary flex items-center justify-center">
-                <span className="text-primary-foreground font-bold text-sm">1024</span>
-              </div>
+            <Link to="/" className="flex items-center space-x-3 mb-4">
+              <img
+                src="/lovable-uploads/cabe5623-5802-4830-8d88-81499877f3f2.png"
+                alt="1024 Concepts Ltd"
+                className="h-10 w-auto"
+              />
               <span className="text-xl font-bold">1024 Concepts</span>
             </Link>
             <p className="text-muted-foreground mb-4 max-w-md">
