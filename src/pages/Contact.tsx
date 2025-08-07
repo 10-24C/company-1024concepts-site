@@ -1,81 +1,10 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Mail, MapPin, Clock, Loader2 } from "lucide-react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-import { useToast } from "@/hooks/use-toast";
-import { supabase } from "@/integrations/supabase/client";
-
-const contactFormSchema = z.object({
-  name: z.string().min(2, "Name must be at least 2 characters").max(100, "Name must be less than 100 characters"),
-  email: z.string().email("Please enter a valid email address"),
-  company: z.string().max(100, "Company name must be less than 100 characters").optional(),
-  message: z.string().min(10, "Message must be at least 10 characters").max(1000, "Message must be less than 1000 characters"),
-});
-
-type ContactFormValues = z.infer<typeof contactFormSchema>;
+import { Card, CardContent } from "@/components/ui/card";
+import { Mail, MapPin, Clock } from "lucide-react";
 
 const Contact = () => {
-  const { toast } = useToast();
-  
-  const form = useForm<ContactFormValues>({
-    resolver: zodResolver(contactFormSchema),
-    defaultValues: {
-      name: "",
-      email: "",
-      company: "",
-      message: "",
-    },
-  });
-
-  const onSubmit = async (data: ContactFormValues) => {
-    try {
-      // Save to database
-      const { error } = await supabase
-        .from('contact_submissions')
-        .insert([data]);
-
-      if (error) {
-        console.error('Error submitting form:', error);
-        toast({
-          title: "Error",
-          description: "There was an error sending your message. Please try again.",
-          variant: "destructive",
-        });
-        return;
-      }
-
-      // Send email notifications
-      try {
-        await supabase.functions.invoke('send-contact-emails', {
-          body: data
-        });
-      } catch (emailError) {
-        console.error('Email sending failed:', emailError);
-        // Don't block the success flow if emails fail
-      }
-
-      toast({
-        title: "Message Sent!",
-        description: "Thank you for your interest. We'll get back to you soon.",
-      });
-      
-      form.reset();
-    } catch (error) {
-      console.error('Unexpected error:', error);
-      toast({
-        title: "Error",
-        description: "There was an unexpected error. Please try again.",
-        variant: "destructive",
-      });
-    }
-  };
 
   return (
     <div className="min-h-screen">
@@ -169,82 +98,47 @@ const Contact = () => {
               </div>
             </div>
 
-            {/* Contact Form */}
+            {/* Email Contact Section */}
             <div>
-              <Card>
-                <CardHeader>
-                  <CardTitle className="text-2xl">Send us a Message</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <Form {...form}>
-                    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-                      <div className="grid md:grid-cols-2 gap-4">
-                        <FormField
-                          control={form.control}
-                          name="name"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>Full Name *</FormLabel>
-                              <FormControl>
-                                <Input placeholder="Your full name" {...field} />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-                        <FormField
-                          control={form.control}
-                          name="email"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>Email Address *</FormLabel>
-                              <FormControl>
-                                <Input placeholder="your.email@example.com" type="email" {...field} />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-                      </div>
-                      
-                      <FormField
-                        control={form.control}
-                        name="company"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Company/Organization</FormLabel>
-                            <FormControl>
-                              <Input placeholder="Your company name" {...field} />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                      
-                      <FormField
-                        control={form.control}
-                        name="message"
-                        render={({ field }) => (
-                          <FormItem>
-                            <FormLabel>Message *</FormLabel>
-                            <FormControl>
-                              <Textarea
-                                placeholder="Tell us about your project or how we can help you..."
-                                rows={6}
-                                {...field}
-                              />
-                            </FormControl>
-                            <FormMessage />
-                          </FormItem>
-                        )}
-                      />
-                      
-                      <Button type="submit" size="lg" className="w-full" disabled={form.formState.isSubmitting}>
-                        {form.formState.isSubmitting && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                        {form.formState.isSubmitting ? "Sending..." : "Send Message"}
-                      </Button>
-                    </form>
-                  </Form>
+              <Card className="border-primary/20 bg-gradient-to-br from-primary/5 to-primary/10">
+                <CardContent className="p-8 text-center">
+                  <div className="w-20 h-20 mx-auto mb-6 bg-primary/20 rounded-full flex items-center justify-center">
+                    <Mail className="h-10 w-10 text-primary" />
+                  </div>
+                  
+                  <h2 className="text-2xl font-bold mb-4">Ready to Get Started?</h2>
+                  <p className="text-muted-foreground mb-6 leading-relaxed">
+                    Send us an email and we'll get back to you within 24 hours. 
+                    Include details about your project, timeline, and any specific requirements.
+                  </p>
+                  
+                  <div className="space-y-4">
+                    <Button size="lg" className="w-full" asChild>
+                      <a href="mailto:info@1024concepts.com?subject=Project Inquiry&body=Hi 1024 Concepts team,%0D%0A%0D%0AI'm interested in learning more about your services. Here are some details about my project:%0D%0A%0D%0AProject Type: %0D%0ATimeline: %0D%0ABudget Range: %0D%0ASpecific Requirements: %0D%0A%0D%0APlease let me know when we can schedule a call to discuss further.%0D%0A%0D%0AThank you!">
+                        <Mail className="mr-2 h-4 w-4" />
+                        Send Email to info@1024concepts.com
+                      </a>
+                    </Button>
+                    
+                    <p className="text-sm text-muted-foreground">
+                      Or copy this email address: 
+                      <span className="font-medium text-primary ml-1">info@1024concepts.com</span>
+                    </p>
+                  </div>
+                  
+                  <div className="mt-8 p-4 bg-background/50 rounded-lg border">
+                    <h3 className="font-semibold mb-2">What to Include in Your Email:</h3>
+                    <ul className="text-sm text-muted-foreground text-left space-y-1">
+                      <li>• Project overview and goals</li>
+                      <li>• Timeline and budget considerations</li>
+                      <li>• Specific requirements or challenges</li>
+                      <li>• Preferred communication method</li>
+                    </ul>
+                  </div>
+                  
+                  <p className="text-xs text-muted-foreground mt-4">
+                    <strong>Response Time:</strong> We typically respond within 24 hours during business days
+                  </p>
                 </CardContent>
               </Card>
             </div>
