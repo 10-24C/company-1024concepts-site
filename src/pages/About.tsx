@@ -80,10 +80,7 @@ const About = () => {
                     <div className="text-center">
                       <div className="text-4xl font-bold text-primary mb-2">3</div>
                       <div className="text-muted-foreground">Primary Sectors</div>
-                      <div className="text-sm text-muted-foreground mt-1">Oil & Gas, Healthcare, 
-& Media 
-
-                    </div>
+                      <div className="text-sm text-muted-foreground mt-1">Energy, Healthcare, Media </div>
                     </div>
                     <div className="text-center">
                       <div className="text-4xl font-bold text-primary mb-2">54</div>
@@ -111,7 +108,7 @@ const About = () => {
               <Card className="p-8">
                 <CardContent className="p-0">
                   <h3 className="text-2xl font-bold mb-4 text-primary">Our Focus</h3>
-                  <p className="text-muted-foreground leading-relaxed">In recent years, our primary focus has been on the Oil and Gas, Healthcare and Media sectors, working with clients and creating solutions that address urgent challenges in these industries and drive meaningful impact across African communities.</p>
+                  <p className="text-muted-foreground leading-relaxed">In recent years, our primary focus has been on the Energy, Healthcare and Media sectors, working with clients and creating solutions that address urgent challenges in these industries and drive meaningful impact across African communities.</p>
                 </CardContent>
               </Card>
             </div>
